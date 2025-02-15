@@ -16,6 +16,8 @@ def main():
                 data=pd.read_csv(upload_file)
             else:
                 data=pd.read_excel(upload_file)
+            if 'Stay_In_Current_City_Years' in data.columns:
+                data['Stay_In_Current_City_Years'] = data['Stay_In_Current_City_Years'].str.replace('+', '').astype(int)
             st.sidebar.success("you have succesffully uploaded the file")
             st.subheader("im going to showcase the data here")
             st.dataframe(data.head(5))
@@ -27,7 +29,7 @@ def main():
 
             st.subheader("i will show you bit of stats")
             st.write("the description of the file",data.describe())
-             
+
 
         except Exception as e:
             print(e)
